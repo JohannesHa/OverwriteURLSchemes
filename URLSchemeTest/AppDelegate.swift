@@ -44,6 +44,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.saveContext()
     }
 
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        // Determine who sent the URL.
+        _ = options[.sourceApplication]
+        
+        let alertController = UIAlertController(title: "Got You!", message: "You clicked the url: \(url)", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Okay!", style: UIAlertAction.Style.default)
+        alertController.addAction(okAction)
+        self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+        
+        return true
+    }
+    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
